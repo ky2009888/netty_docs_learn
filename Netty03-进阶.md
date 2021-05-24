@@ -200,7 +200,10 @@ serverBootstrap.option(ChannelOption.SO_RCVBUF, 10);
   * 滑动窗口：假设接收方的窗口只剩了 128 bytes，发送方的报文大小是 256 bytes，这时放不下了，只能先发送前 128 bytes，等待 ack 后才能发送剩余部分，这就造成了半包
   * MSS 限制：当发送的数据超过 MSS 限制后，会将数据切分发送，就会造成半包
 
-
+* 备注：
+* 1.MSS: Maxitum Segment Size 最大分段大小
+* 2.MSS最大传输大小的缩写，是TCP协议里面的一个概念。
+* 3.MSS就是TCP数据包每次能够传输的最大数据分段。为了达到最佳的传输效能TCP协议在建立连接的时候通常要协商双方的MSS值，这个值TCP协议在实现的时候往往用MTU值代替（需要减去IP数据包包头的大小20Bytes和TCP数据段的包头20Bytes）所以往往MSS为1460。通讯双方会根据双方提供的MSS值得最小值确定为这次连接的最大MSS值
 
 本质是因为 TCP 是流式协议，消息无边界
 
